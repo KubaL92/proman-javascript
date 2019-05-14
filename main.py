@@ -20,7 +20,8 @@ def get_boards():
     """
     All the boards
     """
-    return data_handler.get_boards()
+    pass
+    # return data_handler.get_boards()
 
 
 @app.route("/get-cards/<int:board_id>")
@@ -33,13 +34,9 @@ def get_cards_for_board(board_id: int):
     return data_handler.get_cards_for_board(board_id)
 
 
-def main():
+if __name__ == '__main__':
     app.run(debug=True)
 
     # Serving the favicon
     with app.app_context():
         app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='favicon/favicon.ico'))
-
-
-if __name__ == '__main__':
-    main()
