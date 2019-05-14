@@ -1,4 +1,4 @@
-import db_connection
+from data import db_connection
 import psycopg2
 
 
