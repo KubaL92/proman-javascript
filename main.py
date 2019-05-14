@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, jsonify
 from util import json_response
 
 import data_handler
@@ -20,8 +20,7 @@ def get_boards():
     """
     All the boards
     """
-    pass
-    # return data_handler.get_boards()
+    return data_handler.get_boards()
 
 
 @app.route("/get-cards/<int:board_id>")
