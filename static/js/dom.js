@@ -30,13 +30,21 @@ export let dom = {
     showBoards: function (boards) {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
-
+        //         <div class="board" id="board${board.boardid}">
+        //             <h3>${board.title}</h3>
+        //         </div>;
         let boardList = '';
 
         for(let board of boards){
             boardList += `
-                <div class="board" id="${board.boardid}">${board.title}</div>
-            `;
+            <div class="card">
+                <button class="btn btn-primary btn-dark" type="button" data-toggle="collapse" data-target="#board${board.boardid}" aria-expanded="false" aria-controls="collapseExample">
+                    <div id="board-title">${board.title}<i class="fas fa-pen ml-1"></i></div>
+                </button>
+            </div>
+            <div class="collapse" id="board${board.boardid}"><!--showCards() here--></div>
+            <br>
+            <br>`;
         }
 
         const outerHtml = `${boardList}`;
@@ -47,8 +55,7 @@ export let dom = {
         // retrieves cards and makes showCards called
     },
     showCards: function (cards) {
-        // shows the cards of a board
-        // it adds necessary event listeners also
+        // <div class="card card-body"></div>
     },
     // here comes more features
 };
