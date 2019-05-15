@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    logic.test_db_conn()
     """
     This is a one-pager which shows all the boards and cards
     """
@@ -16,6 +17,7 @@ def index():
 @app.route("/get-boards")
 @json_response
 def get_boards():
+
     """
     All the boards
     """
