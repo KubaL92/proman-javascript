@@ -46,5 +46,14 @@ def connection_handler(function):
     return wrapper
 
 
+def test_connection_db():
+    try:
+        connection = open_database()
+        connection.close()
+        return '### DB_CONN ###: Database connection success!'
+    except p.DatabaseError as exception:
+        raise exception
+
+
 if __name__ == "__main__":
     pass
