@@ -44,6 +44,7 @@ CREATE TABLE tasks (
 
 -- sample data
 
+--first board
 INSERT INTO users (email, username, password)
 VALUES('pornman@gmail.com', 'PornMan', '12345678');
 
@@ -72,3 +73,29 @@ VALUES(1, 1, 'ADAPT', 'Lorem Ipsum');
 
 INSERT INTO tasks (columnID, boardID, title, content)
 VALUES(1, 1, 'OVERCOME', 'Lorem Ipsum');
+
+--second board
+INSERT INTO boards (title, userID)
+VALUES('TEST BOARD 2', 1);
+
+INSERT INTO columns (title, boardID)
+VALUES('NEW', 2);
+
+INSERT INTO columns (title, boardID)
+VALUES('TO DO', 2);
+
+INSERT INTO columns (title, boardID)
+VALUES('IN PROGRESS', 2);
+
+INSERT INTO columns (title, boardID)
+VALUES('DONE', 2);
+
+
+INSERT INTO tasks (columnID, boardID, title, content)
+VALUES(1, 2, 'SSIJ', 'Lorem Ipsum');
+
+INSERT INTO tasks (columnID, boardID, title, content)
+VALUES(1, 2, 'MI', 'Lorem Ipsum');
+
+INSERT INTO tasks (columnID, boardID, title, content)
+VALUES(1, 2, 'PALE', 'Lorem Ipsum');
