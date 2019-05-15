@@ -35,15 +35,11 @@ export let dom = {
 
         for(let board of boards){
             boardList += `
-                <li>${board.title}</li>
+                <div class="board" id="${board.boardid}">${board.title}</div>
             `;
         }
 
-        const outerHtml = `
-            <ul class="board-container">
-                ${boardList}
-            </ul>
-        `;
+        const outerHtml = `${boardList}`;
 
         this._appendToElement(document.querySelector('#boards'), outerHtml);
     },
