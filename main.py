@@ -19,7 +19,7 @@ def get_boards():
     """
     All the boards
     """
-    return logic.create_board_data_object()
+    return logic.get_board_list()
 
 
 @app.route("/get-cards/<int:board_id>")
@@ -29,7 +29,7 @@ def get_cards_for_board(board_id: int):
     All cards that belongs to a board
     :param board_id: id of the parent board
     """
-    return data_manager.get_cards_for_board(board_id)
+    return logic.get_columns_with_tasks(board_id)
 
 
 if __name__ == '__main__':
