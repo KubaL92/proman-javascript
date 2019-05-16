@@ -35,7 +35,7 @@ export let dom = {
             document.querySelector('#boards').insertAdjacentHTML('afterbegin',  `
             <div class="card" id="board-wrap${board.boardid}" data-id="${board.boardid}">
                 <button class="btn btn-primary btn-dark" type="button" data-toggle="collapse" data-target="#board${board.boardid}" aria-expanded="false" aria-controls="collapseExample">
-                    <div id="board-title">${board.title}<i class="fas fa-pen ml-1"></i></div>
+                    <div id="board-title">${board.title}<i class="fas fa-caret-down"></i></div>
                 </button>
             </div>
             <div class="collapse" id="board${board.boardid}">

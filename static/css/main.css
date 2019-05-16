@@ -2,9 +2,53 @@
 {
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 2px;
+    height: auto;
 }
 
     #log:hover
     {
         color: #ffbb01 !important;
     }
+
+   .bg-dark#board\$\{board\.boardid\}
+   {
+       height: 400px;
+       width: 28px;
+       border-top-right-radius: 6px;
+       border-bottom-right-radius: 6px;
+   }
+
+   .board-menu
+   {
+       height: 38px;
+       border-bottom: solid 1px gray;
+   }
+
+   .column-menu
+   {
+
+   }
+
+   .remove-board
+   {
+       height: 38px;
+       border-bottom: solid 1px gray;
+       border-top: solid 1px gray;
+       margin-top: 240px;
+   }
+
+   .save-board
+   {
+       height: 38px;
+       margin-top:
+   }
+
+   /*.fa-plus*/
+   /*{*/
+       /*color: #ffbb01;*/
+   /*}*/
+
+   /*.fa-plus:hover*/
+   /*{*/
+       /*color: #ff9d06;*/
+   /*}*/
