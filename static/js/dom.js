@@ -33,16 +33,16 @@ export let dom = {
 
         for(let board of boards){
             document.querySelector('#boards').insertAdjacentHTML('afterbegin',  `
-            <div class="card" id="board-wrap${board.boardid}" data-id="${board.boardid}">
-                <button class="btn btn-primary btn-dark" type="button" data-toggle="collapse" data-target="#board${board.boardid}" aria-expanded="false" aria-controls="collapseExample">
-                    <div id="board-title">${board.title}<i class="fas fa-pen ml-1"></i></div>
-                </button>
-            </div>
-            <div class="collapse" id="board${board.boardid}">
-                    <div class="card-group" id="board${board.boardid}-content"></div>
-            </div>
-            <br>
-            <br>`);
+                <div class="card" id="board-wrap${board.boardid}" data-id="${board.boardid}">
+                    <button class="btn btn-primary btn-dark" type="button" data-toggle="collapse" data-target="#board${board.boardid}" aria-expanded="false" aria-controls="collapseExample">
+                        <div id="board-title">${board.title}<i class="fas fa-pen ml-1"></i></div>
+                    </button>
+                </div>
+                <div class="collapse" id="board${board.boardid}">
+                        <div class="card-group" id="board${board.boardid}-content"></div>
+                </div>
+                <br>
+                <br>`);
             document.querySelector(`#board-wrap${board.boardid}`).addEventListener('click', function(){
                 dom.loadCards(board.boardid);
             });
@@ -56,21 +56,33 @@ export let dom = {
 
     },
     showCards: function (boardID, cards) {
-        let columns = cards[0];
-        let tasks = cards[1];
-        console.log(columns, tasks);
-        let boardContnet = document.querySelector(`#board${boardID}-content`);
-        boardContnet.innerHTML = '';
+        const columns = cards[0];
+        const tasks = cards[1];
 
-        for(let column in columns){
-            boardContnet.insertAdjacentHTML('afterbegin',`
+        let boardContent = document.querySelector(`#board${boardID}-content`);
+        boardContent.innerHTML = '';
+
+        for (let columnID = 0; columnID < columns.length; columnID++){
+            boardContent.insertAdjacentHTML('beforeend',`
             <div class="card">
                 <div class="card-body">
-                    <div class="card-title">${columns[column].title}</div>
+                    <div class="card-header bg-dark text-white text-center">${columns[columnID].title}</div>
+                    <div class="card border-0" id="column${columnID + 1}-board${boardID}"></div>
                 </div>
             </div>`);
         }
-
+        this.showTasks(boardID, tasks); //calls function showTasks with tasks Array
     },
+    showTasks: function (boardID, tasks){
+        //inserting tasks into column by columnID
+        for (let taskID = 0; taskID < tasks.length; taskID++){
+            document.querySelector(`#column${tasks[taskID].columnid}-board${boardID}`).insertAdjacentHTML('beforeend', `
+            <div class="card border-info text-center p-3 mt-2">
+                <div class="card-header text-white bg-secondary">${tasks[taskID].title}</div>
+                <p class="card-text">${tasks[taskID].content}</p>
+                <button class="btn btn-sm btn-info">Edit task</button>
+            </div>`);
+        }
+    }
     // here comes more features
 };
