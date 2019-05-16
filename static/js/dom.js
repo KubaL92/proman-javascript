@@ -67,7 +67,7 @@ export let dom = {
             <div class="card">
                 <div class="card-body">
                     <div class="card-header bg-dark text-white text-center">${columns[columnID].title}</div>
-                    <div class="card border-0" id="column${columnID + 1}-board${boardID}"></div>
+                    <div class="card border-0 column" id="column${columnID + 1}-board${boardID}"></div>
                 </div>
             </div>`);
         }
@@ -83,6 +83,14 @@ export let dom = {
                 <button class="btn btn-sm btn-info">Edit task</button>
             </div>`);
         }
+        this.dragNdrop(boardID)
+    },
+    dragNdrop: function(boardID){
+        dragula(
+            [document.querySelector(`#column1-board${boardID}`),
+            document.querySelector(`#column2-board${boardID}`),
+            document.querySelector(`#column3-board${boardID}`),
+            document.querySelector(`#column4-board${boardID}`)]);
     }
     // here comes more features
 };
