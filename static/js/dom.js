@@ -80,7 +80,7 @@ export let dom = {
             <div class="card border-info text-center p-3 mt-2">
                 <div class="card-header text-white bg-secondary">${tasks[taskID].title}</div>
                 <p class="card-text">${tasks[taskID].content}</p>
-                <button class="btn btn-sm btn-info">Edit task</button>
+                <button class="btn btn-sm btn-info">See details</button>
             </div>`);
         }
         this.dragNdrop(boardID)
