@@ -30,32 +30,47 @@ export let dom = {
     showBoards: function (boards) {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
-        //         <div class="board" id="board${board.boardid}">
-        //             <h3>${board.title}</h3>
-        //         </div>;
-        let boardList = '';
 
         for(let board of boards){
-            boardList += `
-            <div class="card">
+            document.querySelector('#boards').insertAdjacentHTML('afterbegin',  `
+            <div class="card" id="board-wrap${board.boardid}" data-id="${board.boardid}">
                 <button class="btn btn-primary btn-dark" type="button" data-toggle="collapse" data-target="#board${board.boardid}" aria-expanded="false" aria-controls="collapseExample">
                     <div id="board-title">${board.title}<i class="fas fa-pen ml-1"></i></div>
                 </button>
             </div>
-            <div class="collapse" id="board${board.boardid}"><!--showCards() here--></div>
+            <div class="collapse" id="board${board.boardid}">
+                    <div class="card-group" id="board${board.boardid}-content"></div>
+            </div>
             <br>
-            <br>`;
+            <br>`);
+            document.querySelector(`#board-wrap${board.boardid}`).addEventListener('click', function(){
+                dom.loadCards(board.boardid);
+            });
         }
-
-        const outerHtml = `${boardList}`;
-
-        this._appendToElement(document.querySelector('#boards'), outerHtml);
     },
     loadCards: function (boardId) {
-        // retrieves cards and makes showCards called
+        dataHandler.getCardsByBoardId(boardId, function (cards) {
+            dom.showCards(boardId, cards);
+        });
+
+
     },
-    showCards: function (cards) {
-        // <div class="card card-body"></div>
+    showCards: function (boardID, cards) {
+        let columns = cards[0];
+        let tasks = cards[1];
+        console.log(columns, tasks);
+        let boardContnet = document.querySelector(`#board${boardID}-content`);
+        boardContnet.innerHTML = '';
+
+        for(let column in columns){
+            boardContnet.insertAdjacentHTML('afterbegin',`
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">${columns[column].title}</div>
+                </div>
+            </div>`);
+        }
+
     },
     // here comes more features
 };
