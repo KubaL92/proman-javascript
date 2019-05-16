@@ -5,6 +5,9 @@
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
         <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+        <!-- DRAGULA -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css" />
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' defer></script>
         <!-- fontawesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <!-- Jquery(bootstrap) -->
@@ -16,7 +19,7 @@
     <div>
       <button type="button" class="btn btn-warning btn-lg btn-block">Add New Table</button>
     </div>
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <div id="boards">
 
         </div>
@@ -40,6 +43,7 @@
         </div>
     </div> <!-- /#sidebar-wrapper -->
   </div>
+
 
 {% endblock content %}
 

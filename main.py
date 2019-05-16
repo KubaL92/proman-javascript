@@ -1,9 +1,11 @@
-from flask import Flask, render_template, url_for, jsonify
+from flask import Flask, render_template, jsonify, redirect, url_for, flash, request, session
+from forms import RegistrationForm, LoginForm
 from util import json_response
 import logic
 
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = 'dd7355cb749a3c15f82d84af2ee43f32'
 
 @app.route("/")
 def index():
@@ -12,6 +14,37 @@ def index():
     This is a one-pager which shows all the boards and cards
     """
     return render_template('index.html')
+
+@app.route('/logout')
+def logout():
+    flash(f'Logged out!', 'success')
+    session.pop('username', None)
+    return redirect(url_for('index'))
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        if not logic.save_new_user_data(form.data):  # if username is occupied flash danger message
+            flash(f'Username {form.username.data} is already taken, try another!', 'danger')
+        else:
+            flash(f'Account created for {form.username.data}!', 'success')
+            return redirect(url_for('index'))
+    return render_template('register.html', form=form, title='register')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if logic.user_login(form.data):  # check if user gave correct data
+            flash(f'Logged In. Nice to see u again!', 'success')
+            session['username'] = form.data['email']
+            return redirect(url_for('index'))
+        else:
+            flash(f'Login Unsuccessful. Check your Username and Password!', 'danger')
+    return render_template('login.html', form=form, title='login')
 
 
 @app.route("/get-boards")
