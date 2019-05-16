@@ -14,3 +14,11 @@ def get_tasks_to_board_and_column(board_id):
     return data_manager.execute_select("SELECT columnID, title, content FROM tasks WHERE "
                                        "boardID=%(relatedBoard)s",
                                        {'relatedBoard': board_id})
+
+
+def get_pass_by_email(email):
+    return data_manager.execute_select(" SELECT password FROM users WHERE "
+                                       "email=%(email)s;",
+                                       {'email': email})
+
+
