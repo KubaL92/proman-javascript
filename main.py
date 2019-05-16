@@ -31,7 +31,7 @@ def get_cards_for_board(board_id: int):
     All cards that belongs to a board
     :param board_id: id of the parent board
     """
-    return logic.get_columns_with_tasks(board_id)
+    return logic.get_columns_with_tasks_by_board_id(board_id)
 
 
 if __name__ == '__main__':
