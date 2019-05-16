@@ -32,12 +32,13 @@ export let dom = {
         // it adds necessary event listeners also
 
         for(let board of boards){
+            let sideBar = this.sidebar(board.boardid);
             document.querySelector('#boards').insertAdjacentHTML('afterbegin',  `
                 <div class="card" id="board-wrap${board.boardid}" data-id="${board.boardid}">
                     <button class="btn btn-primary btn-dark" type="button" data-toggle="collapse" data-target="#board${board.boardid}" aria-expanded="false" aria-controls="collapseExample">
                         <div id="board-title">${board.title}<i class="fas fa-caret-down ml-1"></i></div>
                     </button>
-                </div>
+                </div><div class="float-right">${sideBar}</div>
                 <div class="collapse" id="board${board.boardid}">
                         <div class="card-group" id="board${board.boardid}-content"></div>
                 </div>
@@ -91,6 +92,27 @@ export let dom = {
             document.querySelector(`#column2-board${boardID}`),
             document.querySelector(`#column3-board${boardID}`),
             document.querySelector(`#column4-board${boardID}`)]);
+    },
+    sidebar: function(boardID){
+        return `
+        <div class="collapse bg-dark" id="board${boardID}">
+    <!-- Sidebar -->
+            <div id="sidebar">
+                <div class="board-menu">
+                  <a href="#" class="text-warning"><i class="fas fa-pen ml-1"></i></a>
+                </div>
+                <div class="column-menu">
+                  <a href="#" class="text-warning"><i class="fas fa-plus"></i></a><br>
+                  <a href="#" class="text-warning"><i class="fas fa-pen ml-1"></i></a>
+                </div>
+                <div class="remove-board">
+                  <a href="#" class="text-danger"><i class="fas fa-times"></i></a>
+                </div>
+                <div class="save-board">
+                  <a href="#" class="text-success"><i class="fas fa-check-square"></i></a>
+                </div>
+            </div> <!-- /#sidebar-wrapper -->
+        </div>`;
     }
     // here comes more features
 };
