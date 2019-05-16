@@ -2,21 +2,6 @@
 import { dataHandler } from "./data_handler.js";
 
 export let dom = {
-    _appendToElement: function (elementToExtend, textToAppend, prepend = false) {
-        // function to append new DOM elements (represented by a string) to an existing DOM element
-        let fakeDiv = document.createElement('div');
-        fakeDiv.innerHTML = textToAppend.trim();
-
-        for (let childNode of fakeDiv.childNodes) {
-            if (prepend) {
-                elementToExtend.prependChild(childNode);
-            } else {
-                elementToExtend.appendChild(childNode);
-            }
-        }
-
-        return elementToExtend.lastChild;
-    },
     init: function () {
         // This function should run once, when the page is loaded.
     },
@@ -49,16 +34,20 @@ export let dom = {
         }
     },
     loadCards: function (boardId) {
+        //get cards from database and runs functions that shows board content-(cards)
         dataHandler.getCardsByBoardId(boardId, function (cards) {
+            console.log(cards);
             dom.showCards(boardId, cards);
+            dom.showTasks(boardId, cards);
+            dom.dragNdrop(boardId);
         });
 
 
     },
     showCards: function (boardID, cards) {
         const columns = cards[0];
-        const tasks = cards[1];
 
+        // clears board content before loading new one while opening board content again
         let boardContent = document.querySelector(`#board${boardID}-content`);
         boardContent.innerHTML = '';
 
@@ -71,26 +60,34 @@ export let dom = {
                 </div>
             </div>`);
         }
-        this.showTasks(boardID, tasks); //calls function showTasks with tasks Array
     },
-    showTasks: function (boardID, tasks){
+    showTasks: function (boardID, cards){
+        const tasks = cards[1];
         //inserting tasks into column by columnID
         for (let taskID = 0; taskID < tasks.length; taskID++){
             document.querySelector(`#column${tasks[taskID].columnid}-board${boardID}`).insertAdjacentHTML('beforeend', `
-            <div class="card border-info text-center p-3 mt-2">
+            <div class="card border-info text-center p-3 mt-2" id="task${tasks[taskID].taskid}">
                 <div class="card-header text-white bg-secondary">${tasks[taskID].title}</div>
                 <p class="card-text">${tasks[taskID].content}</p>
                 <button class="btn btn-sm btn-info">Edit task</button>
             </div>`);
         }
-        this.dragNdrop(boardID)
     },
     dragNdrop: function(boardID){
+        //adding dragndrop to every column in a board
+        //html of id's below built in this.showBoards
         dragula(
             [document.querySelector(`#column1-board${boardID}`),
             document.querySelector(`#column2-board${boardID}`),
             document.querySelector(`#column3-board${boardID}`),
-            document.querySelector(`#column4-board${boardID}`)]);
+            document.querySelector(`#column4-board${boardID}`)])
+            .on('drop', function (el) {
+                let taskID = parseInt(el.parentElement.id.substr(3,1));
+                console.log(el.id);
+                let newColumn = parseInt(el.parentElement.id.substr(6,1));
+                dataHandler.change_column_of_task(taskID, newColumn, console.log);
+            });
     }
-    // here comes more features
+        // here comes more features
 };
+

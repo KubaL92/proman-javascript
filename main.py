@@ -67,6 +67,18 @@ def get_cards_for_board(board_id: int):
     return logic.get_columns_with_tasks_by_board_id(board_id)
 
 
+@app.route("/change-column-of-task/<int:new_column>/<int:task_id>")
+def change_column_of_task(new_column: int, task_id: int):
+    """
+    All cards that belongs to a board
+    :param new_column: id new_column to write to task
+    :param task_id: id of task
+    """
+    logic.change_column_of_task(task_id, new_column)
+
+    return ''
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 

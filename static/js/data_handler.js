@@ -55,6 +55,12 @@ export let dataHandler = {
     },
     createNewCard: function (cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
+    },
+    change_column_of_task: function(taskID, newColumn, callback){
+        this._api_get(`/change-column-of-task/${newColumn}/${taskID}`, (response) => {
+            this._data = response;
+            callback(response);
+        });
     }
     // here comes more features
 };
