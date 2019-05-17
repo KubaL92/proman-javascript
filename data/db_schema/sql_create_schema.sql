@@ -76,7 +76,7 @@ VALUES(1, 1, 'OVERCOME', 'Lorem Ipsum');
 
 --second board
 INSERT INTO boards (title, userID)
-VALUES('TEST BOARD 2', 1);
+VALUES('Ask-Mate Project', 1);
 
 INSERT INTO columns (title, boardID)
 VALUES('NEW', 2);
@@ -92,10 +92,52 @@ VALUES('DONE', 2);
 
 
 INSERT INTO tasks (columnID, boardID, title, content)
-VALUES(1, 2, 'SSIJ', 'Lorem Ipsum');
+VALUES(1, 2, 'List questions', 'As a User, When I open the website, I''d like to see a list of questions, sorted by the latest question on top.Route:/list');
 
 INSERT INTO tasks (columnID, boardID, title, content)
-VALUES(1, 2, 'MI', 'Lorem Ipsum');
+VALUES(1, 2, 'Ask a question', 'As a User,
+When I click on a "Ask a question" button/link,
+I''d like to be able to fill in a form with my question and it''s details.
+Then I''d like to be redirected to the "Display a question" page of this new question.
+route:
+/add-question');
 
 INSERT INTO tasks (columnID, boardID, title, content)
-VALUES(1, 2, 'PALE', 'Lorem Ipsum');
+VALUES(1, 2, 'Post an answer', 'There should be a page where I can post an answer to an existing question.' ||
+ ' The answer must be at least 10 characters long. (/question/<question_id>/new-answer).' ||
+ ' There should be a link at each question detail page that leads to this page.');
+
+--second board
+INSERT INTO boards (title, userID)
+VALUES('API-WARS Project', 1);
+
+INSERT INTO columns (title, boardID)
+VALUES('NEW', 3);
+
+INSERT INTO columns (title, boardID)
+VALUES('TO DO', 3);
+
+INSERT INTO columns (title, boardID)
+VALUES('IN PROGRESS', 3);
+
+INSERT INTO columns (title, boardID)
+VALUES('DONE', 3);
+
+
+INSERT INTO tasks (columnID, boardID, title, content)
+VALUES(4, 3, 'NAVBAR', 'Lorem Ipsum');
+
+INSERT INTO tasks (columnID, boardID, title, content)
+VALUES(4, 3, 'FOOTER', 'Lorem Ipsum');
+
+INSERT INTO tasks (columnID, boardID, title, content)
+VALUES(2, 3, 'SITE CONTENT', 'Lorem Ipsum');
+
+INSERT INTO tasks (columnID, boardID, title, content)
+VALUES(2, 3, 'MENU', 'Lorem Ipsum');
+
+INSERT INTO tasks (columnID, boardID, title, content)
+VALUES(1, 3, 'LOGIN', 'Lorem Ipsum');
+
+INSERT INTO tasks (columnID, boardID, title, content)
+VALUES(1, 3, 'REGISTER', 'Lorem Ipsum');
