@@ -49,15 +49,16 @@ export let dom = {
         }
     },
     loadCards: function (boardId) {
+        //get cards from database and runs functions that shows board content-(cards)
         dataHandler.getCardsByBoardId(boardId, function (cards) {
+            console.log(cards);
             dom.showCards(boardId, cards);
+            dom.showTasks(boardId, cards);
+            dom.dragNdrop(boardId);
         });
-
-
     },
     showCards: function (boardID, cards) {
         const columns = cards[0];
-        const tasks = cards[1];
 
         let boardContent = document.querySelector(`#board${boardID}-content`);
         boardContent.innerHTML = '';
@@ -71,9 +72,9 @@ export let dom = {
                 </div>
             </div>`);
         }
-        this.showTasks(boardID, tasks); //calls function showTasks with tasks Array
     },
-    showTasks: function (boardID, tasks){
+    showTasks: function (boardID, cards){
+        const tasks = cards[1];
         //inserting tasks into column by columnID
         for (let taskID = 0; taskID < tasks.length; taskID++){
             document.querySelector(`#column${tasks[taskID].columnid}-board${boardID}`).insertAdjacentHTML('beforeend', `
@@ -83,7 +84,6 @@ export let dom = {
                 <button class="btn btn-sm btn-info">See details</button>
             </div>`);
         }
-        this.dragNdrop(boardID)
     },
     dragNdrop: function(boardID){
         dragula(
