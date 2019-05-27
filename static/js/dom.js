@@ -24,7 +24,7 @@ export let dom = {
                     </button>
                 </div>
                 <div class="collapse" id="board${board.boardid}">
-                        <div class="card-group" id="board${board.boardid}-content"></div>
+                        <div class="card-group" id="board${board.boardid}-content">//</div>
                 </div>
                 <br>
                 <br>`);

@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'dd7355cb749a3c15f82d84af2ee43f32'
 
+
 @app.route("/")
 def index():
     logic.test_db_conn()
@@ -14,6 +15,7 @@ def index():
     This is a one-pager which shows all the boards and cards
     """
     return render_template('index.html')
+
 
 @app.route('/logout')
 def logout():

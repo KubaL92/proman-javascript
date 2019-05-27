@@ -3,6 +3,11 @@
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 2px;
 }
+    .content
+    {
+        min-height: 1000px;
+    }
+
 
     #log:hover
     {

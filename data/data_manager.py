@@ -33,7 +33,7 @@ def execute_dml_statement(cursor, statement, variables=None):
     try:
         result = cursor.fetchone()
     except psycopg2.ProgrammingError as pe:
-        print(pe, 'error, suk dik')
+        print(pe, 'error')
     return result
 
 @db_connection.connection_handler
