@@ -2,10 +2,11 @@ from data import data_manager
 from data import queries
 import bcrypt
 
+
 def save_new_user_data(user_data):
     hashed_pass = hash_password(user_data['password'])
     user_data['password'] = hashed_pass
-    data_manager.add_user(user_data)
+    queries.add_user(user_data)
 
 
 def user_login(user_data):

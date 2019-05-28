@@ -1,3 +1,4 @@
+import { dom } from "./dom.js";
 // this object contains the functions which handle the data and its reading/writing
 // feel free to extend and change to fit your needs
 
@@ -19,6 +20,18 @@ export let dataHandler = {
     _api_post: function (url, data, callback) {
         // it is not called from outside
         // sends the data to the API, and calls callback function
+
+        fetch(url, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+        })
+            .then(response=>response.json())
+            .then(json_response=>callback(json_response))
+            .catch(error=>console.log('Error:', error))
     },
     init: function () {
     },
@@ -50,11 +63,18 @@ export let dataHandler = {
     getCard: function (cardId, callback) {
         // the card is retrieved and then the callback function is called with the card
     },
-    createNewBoard: function (boardTitle, callback) {
+    createNewBoard: function () {
         // creates new board, saves it and calls the callback function with its data
+        this._api_get('/new-board', function(response) {
+            dom.newBoard(response);
+        });
+
+
     },
     createNewCard: function (cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
     }
     // here comes more features
+
+
 };

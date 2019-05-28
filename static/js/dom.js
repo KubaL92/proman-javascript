@@ -8,7 +8,6 @@ export let dom = {
     loadBoards: function () {
         // retrieves boards and makes showBoards called
         dataHandler.getBoards(function(boards){
-            console.log(boards);
             dom.showBoards(boards);
         });
     },
@@ -76,6 +75,25 @@ export let dom = {
             document.querySelector(`#column2-board${boardID}`),
             document.querySelector(`#column3-board${boardID}`),
             document.querySelector(`#column4-board${boardID}`)]);
+    },
+
+    newBoard: function (board) {
+        document.querySelector('#boards').insertAdjacentHTML('afterbegin',  `
+        
+                <div class="card" id="board-wrap${board.boardid}" data-id="${board.boardid}">
+                    <button class="btn btn-primary btn-dark" type="button" data-toggle="collapse" data-target="#board${board.boardid}" aria-expanded="false" aria-controls="collapseExample">
+                        <div id="board-title">${board.title}<i class="fas fa-pen ml-1"></i></div>
+                    </button>
+                </div>
+                <div class="collapse" id="board${board.boardid}">
+                        <div class="card-group" id="board${board.boardid}-content">//</div>
+                </div>
+                <br>
+                <br>`);
+        document.querySelector(`#board-wrap${board.boardid}`).addEventListener('click', function(){
+            dom.loadCards(board.boardid);
+        });
+
     }
     // here comes more features
 };

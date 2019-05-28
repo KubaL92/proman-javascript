@@ -36,13 +36,5 @@ def execute_dml_statement(cursor, statement, variables=None):
         print(pe, 'error')
     return result
 
-@db_connection.connection_handler
-def add_user(cursor, data: dict):
-    try:
-        cursor.execute("""
-                INSERT INTO users
-                (email, username, password)
-                VALUES(%(email)s, %(username)s, %(password)s); """, data)
-    except psycopg2.IntegrityError:
-        return False
+
 

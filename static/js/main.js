@@ -1,4 +1,5 @@
 import { dom } from "./dom.js";
+import {dataHandler} from "./data_handler.js";
 
 
 
@@ -10,4 +11,11 @@ function init() {
     dom.loadBoards();
 }
 
+
+
 init();
+
+let newBoardButton = document.querySelector("#new-board-button");
+newBoardButton.addEventListener("click", function () {
+    dataHandler.createNewBoard();
+});

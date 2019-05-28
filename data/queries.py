@@ -22,3 +22,17 @@ def get_pass_by_email(email):
                                        {'email': email})
 
 
+def add_board(board_data):
+    return data_manager.execute_dml_statement("INSERT INTO boards (title, userID) "
+                                              "VALUES(%(title)s, %(user_id)s);", board_data)
+
+def add_column(column):
+    return data_manager.execute_dml_statement("INSERT INTO columns (title, boardID) "
+                                              "VALUES(%(title)s, %(board_id)s);", column)
+
+def add_user(user_data):
+    return data_manager.execute_dml_statement("INSERT INTO users (email, username, password)"
+                                              "VALUES %(email)s, %(username)s, %(password)s);", user_data)
+
+
+

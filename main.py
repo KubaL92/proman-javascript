@@ -59,6 +59,16 @@ def get_boards():
     return logic.get_board_list()
 
 
+@app.route("/new-board", methods=['GET'])
+@json_response
+def new_board():
+    logic.add_new_board()
+    boards_data = logic.get_board_list()
+    latest_board = boards_data[-1]
+    logic.add_fixed_columns(latest_board['boardid'])
+    return latest_board
+
+
 @app.route("/get-cards/<int:board_id>")
 @json_response
 def get_cards_for_board(board_id: int):
