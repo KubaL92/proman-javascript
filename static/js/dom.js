@@ -52,7 +52,7 @@ export let dom = {
             <div class="card">
                 <div class="card-body">
                     <div class="card-header bg-dark text-white text-center">${columns[columnID].title}</div>
-                    <div class="card border-0 column" id="column${columnID + 1}-board${boardID}"></div>
+                    <div class="card border-0 column" id="column${columnID + 1}-board${boardID}" data-col-id="${columnID + 1}"></div>
                 </div>
             </div>`);
         }
@@ -62,7 +62,7 @@ export let dom = {
         //inserting tasks into column by columnID
         for (let taskID = 0; taskID < tasks.length; taskID++){
             document.querySelector(`#column${tasks[taskID].columnid}-board${boardID}`).insertAdjacentHTML('beforeend', `
-            <div class="card border-info text-center p-3 mt-2">
+            <div class="card border-info text-center p-3 mt-2" data-task-id="${tasks[taskID].taskid}">
                 <div class="card-header text-white bg-secondary">${tasks[taskID].title}</div>
                 <p class="card-text">${tasks[taskID].content}</p>
                 <button class="btn btn-sm btn-info">See details</button>
@@ -70,13 +70,19 @@ export let dom = {
         }
     },
     dragNdrop: function(boardID){
-        dragula(
-            [document.querySelector(`#column1-board${boardID}`),
-            document.querySelector(`#column2-board${boardID}`),
-            document.querySelector(`#column3-board${boardID}`),
-            document.querySelector(`#column4-board${boardID}`)]);
-    },
 
+        const containers = [document.querySelector(`#column1-board${boardID}`),
+                document.querySelector(`#column2-board${boardID}`),
+                document.querySelector(`#column3-board${boardID}`),
+                document.querySelector(`#column4-board${boardID}`)];
+
+        let drake = dragula({ containers: containers });
+
+        drake.on('dragend', function(el){
+            console.log(el.parentNode.dataset.colId);
+            dataHandler.changeTaskColumn(el);
+        })
+    },
     newBoard: function (board) {
         document.querySelector('#boards').insertAdjacentHTML('afterbegin',  `
         
@@ -93,7 +99,6 @@ export let dom = {
         document.querySelector(`#board-wrap${board.boardid}`).addEventListener('click', function(){
             dom.loadCards(board.boardid);
         });
-
     }
     // here comes more features
 };
