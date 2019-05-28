@@ -21,6 +21,10 @@ def test_db_conn():
     print(db_connection.test_connection_db())
 
 
+def change_task_col(task_id, new_col):
+    queries.change_task_column(task_id, new_col)
+
+
 if __name__ == '__main__':
     pprint(get_columns_with_tasks_by_board_id(1))
 

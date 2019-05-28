@@ -69,6 +69,13 @@ def get_cards_for_board(board_id: int):
     return logic.get_columns_with_tasks_by_board_id(board_id)
 
 
+@app.route("/change-task-column/<int:task_id>/<int:new_col>")
+@json_response
+def change_task_column(task_id, new_col):
+    logic.change_task_col(task_id, new_col)
+    return "{'jazda': 'zkurwami'}"
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 

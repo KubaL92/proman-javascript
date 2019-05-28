@@ -36,6 +36,7 @@ def execute_dml_statement(cursor, statement, variables=None):
         print(pe, 'error')
     return result
 
+
 @db_connection.connection_handler
 def add_user(cursor, data: dict):
     try:
