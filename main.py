@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, redirect, url_for, flash, req
 from forms import RegistrationForm, LoginForm
 from util import json_response
 import logic
+import users
 
 app = Flask(__name__)
 
@@ -11,10 +12,15 @@ app.config['SECRET_KEY'] = 'dd7355cb749a3c15f82d84af2ee43f32'
 @app.route("/")
 def index():
     logic.test_db_conn()
+    if 'username' in session:
+        logged = session['username']
+    else:
+        logged = False
+
     """
     This is a one-pager which shows all the boards and cards
     """
-    return render_template('index.html')
+    return render_template('index.html', title='HOME', logged=logged)
 
 
 @app.route('/logout')
@@ -28,7 +34,7 @@ def logout():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        if not logic.save_new_user_data(form.data):  # if username is occupied flash danger message
+        if not users.save_new_user_data(form.data):  # if username is occupied flash danger message
             flash(f'Username {form.username.data} is already taken, try another!', 'danger')
         else:
             flash(f'Account created for {form.username.data}!', 'success')
@@ -40,7 +46,7 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if logic.user_login(form.data):  # check if user gave correct data
+        if users.user_login(form.data):  # check if user gave correct data
             flash(f'Logged In. Nice to see u again!', 'success')
             session['username'] = form.data['email']
             return redirect(url_for('index'))

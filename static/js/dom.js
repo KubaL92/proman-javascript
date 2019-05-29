@@ -53,6 +53,7 @@ export let dom = {
                 <div class="card-body">
                     <div class="card-header bg-dark text-white text-center">${columns[columnID].title}</div>
                     <div class="card border-0 column" id="column${columnID + 1}-board${boardID}" data-col-id="${columnID + 1}"></div>
+                 
                 </div>
             </div>`);
         }
