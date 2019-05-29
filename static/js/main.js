@@ -19,3 +19,4 @@ let newBoardButton = document.querySelector("#new-board-button");
 newBoardButton.addEventListener("click", function () {
     dataHandler.createNewBoard();
 });
+

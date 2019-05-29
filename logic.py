@@ -47,6 +47,14 @@ def change_task_col(task_id, new_col):
     queries.change_task_column(task_id, new_col)
 
 
+def get_task_info(task_id):
+    return queries.get_task_by_task_id(task_id)
+
+
+def save_new_task_data(task_data):
+    queries.save_new_task_data(task_data)
+
+
 if __name__ == '__main__':
     pprint(get_columns_with_tasks_by_board_id(1))
 

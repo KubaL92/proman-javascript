@@ -27,7 +27,7 @@ export let dataHandler = {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: data
+            body: JSON.stringify(data)
         })
             .then(response=>response.json())
             .then(json_response=>callback(json_response))
@@ -68,8 +68,6 @@ export let dataHandler = {
         this._api_get('/new-board', function(response) {
             dom.newBoard(response);
         });
-
-
     },
     createNewCard: function (cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
@@ -78,6 +76,18 @@ export let dataHandler = {
         let taskID = el.dataset.taskId;
         let newColumn = el.parentNode.dataset.colId;
         this._api_get(`/change-task-column/${taskID}/${newColumn}`, function(res){
+            console.log(res);
+        })
+    },
+    showTaskModal: function(event){
+        let taskID = event.target.parentElement.dataset.taskId;
+        let boardID = event.target.parentElement.parentElement.dataset.boardId;
+        dataHandler._api_get(`/get-task-info/${taskID}`, function (res) {
+            dom.fillTaskModal(res, boardID);
+        });
+    },
+    saveNewTaskData: function(taskData){
+        this._api_post('/save-new-task-data', taskData, function(res){
             console.log(res);
         })
     }

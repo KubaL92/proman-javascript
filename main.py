@@ -83,7 +83,23 @@ def get_cards_for_board(board_id: int):
 @json_response
 def change_task_column(task_id, new_col):
     logic.change_task_col(task_id, new_col)
-    return "{'jazda': 'zkurwami'}"
+    return "{'message': 'task column changed'}"
+
+
+@app.route("/get-task-info/<int:task_id>")
+@json_response
+def get_task_info(task_id):
+    task_info = logic.get_task_info(task_id)[0]
+    task_info['taskID'] = task_id
+    return task_info
+
+
+@app.route("/save-new-task-data", methods=['POST'])
+@json_response
+def save_new_task_data():
+    task_data = request.json
+    logic.save_new_task_data(task_data)
+    return "{'message': 'new task data saved'}"
 
 
 if __name__ == '__main__':

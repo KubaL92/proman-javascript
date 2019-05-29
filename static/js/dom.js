@@ -52,7 +52,7 @@ export let dom = {
             <div class="card">
                 <div class="card-body">
                     <div class="card-header bg-dark text-white text-center">${columns[columnID].title}</div>
-                    <div class="card border-0 column" id="column${columnID + 1}-board${boardID}" data-col-id="${columnID + 1}"></div>
+                    <div class="card border-0 column" id="column${columnID + 1}-board${boardID}" data-col-id="${columnID + 1}" data-board-id="${boardID}"></div>
                 </div>
             </div>`);
         }
@@ -65,8 +65,12 @@ export let dom = {
             <div class="card border-info text-center p-3 mt-2" data-task-id="${tasks[taskID].taskid}">
                 <div class="card-header text-white bg-secondary">${tasks[taskID].title}</div>
                 <p class="card-text">${tasks[taskID].content}</p>
-                <button class="btn btn-sm btn-info">See details</button>
+                <button class="btn btn-sm btn-info" id="show-task-details-btn" data-target="#task-details-modal" data-toggle="modal">
+                    See details
+                </button>
             </div>`);
+            //adding event listener to task btn
+            document.querySelector('#show-task-details-btn').addEventListener('click', dataHandler.showTaskModal);
         }
     },
     dragNdrop: function(boardID){
@@ -98,6 +102,20 @@ export let dom = {
                 <br>`);
         document.querySelector(`#board-wrap${board.boardid}`).addEventListener('click', function(){
             dom.loadCards(board.boardid);
+        });
+    },
+    fillTaskModal: function (task_data, boardID){
+        let title = document.querySelector('#task-title');
+        let content = document.querySelector('#task-content');
+
+        title.value = task_data.title; //insert old data into textareas
+        content.value = task_data.content;
+        console.log(boardID);
+        document.querySelector('#close-task-modal').addEventListener('click', function(){
+            task_data.title = title.value; //catch new/changed data form texareas
+            task_data.content = content.value;
+            dataHandler.saveNewTaskData(task_data);
+            // dom.loadCards(boardID);
         });
     }
     // here comes more features

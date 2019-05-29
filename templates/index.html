@@ -16,6 +16,34 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     {% endblock head %}
 {% block content %}
+<!-- TASK DETAILS MODAL-->
+    <div class="modal fade" id="task-details-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <label for="task-title">Label: </label>
+                    <input type='text' class="form-control form-control-sm" id="task-title" style="width: 300px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="task-content" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="task-content"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-warning" id="close-task-modal" data-dismiss="modal">
+                        Save & Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- TASK DETAILS MODAL-->
     <div>
       <button type="button" class="btn btn-warning btn-lg btn-block rounded-0" id="new-board-button">Add New Table</button>
     </div>
