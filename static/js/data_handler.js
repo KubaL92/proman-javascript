@@ -79,14 +79,17 @@ export let dataHandler = {
             console.log(res);
         })
     },
-    showTaskModal: function(event){
+    getDataTaskModal: function(event){
         let taskID = event.target.parentElement.dataset.taskId;
         let boardID = event.target.parentElement.parentElement.dataset.boardId;
-        dataHandler._api_get(`/get-task-info/${taskID}`, function (res) {
-            dom.fillTaskModal(res, boardID);
+        console.log({'boardID': boardID, 'taskID': taskID});
+
+        dataHandler._api_get(`/get-task-info/${taskID}`, function (responseTaskData) {
+            dom.fillTaskModal(responseTaskData);
         });
     },
     saveNewTaskData: function(taskData){
+        console.log(taskData);
         this._api_post('/save-new-task-data', taskData, function(res){
             console.log(res);
         })

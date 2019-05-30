@@ -62,16 +62,18 @@ export let dom = {
         //inserting tasks into column by columnID
         for (let taskID = 0; taskID < tasks.length; taskID++){
             document.querySelector(`#column${tasks[taskID].columnid}-board${boardID}`).insertAdjacentHTML('beforeend', `
-            <div class="card border-info text-center p-3 mt-2" data-task-id="${tasks[taskID].taskid}">
+            <div class="card border-info text-center p-3 mt-2" data-task-id="${tasks[taskID].taskid}" id="task${tasks[taskID].taskid}">
                 <div class="card-header text-white bg-secondary">${tasks[taskID].title}</div>
                 <p class="card-text">${tasks[taskID].content}</p>
-                <button class="btn btn-sm btn-info" id="show-task-details-btn" data-target="#task-details-modal" data-toggle="modal">
+                <button class="btn btn-sm btn-info" id="task-details-btn${tasks[taskID].taskid}" data-target="#task-details-modal" data-toggle="modal">
                     See details
                 </button>
             </div>`);
-            //adding event listener to task btn
-            document.querySelector('#show-task-details-btn').addEventListener('click', dataHandler.showTaskModal);
+            document.querySelector(`#task-details-btn${tasks[taskID].taskid}`).addEventListener('click', dataHandler.getDataTaskModal);
         }
+            //adding event listener to task btn
+
+
     },
     dragNdrop: function(boardID){
 
@@ -104,19 +106,30 @@ export let dom = {
             dom.loadCards(board.boardid);
         });
     },
-    fillTaskModal: function (task_data, boardID){
+    fillTaskModal: function (task_data) {
         let title = document.querySelector('#task-title');
         let content = document.querySelector('#task-content');
 
-        title.value = task_data.title; //insert old data into textareas
+        title.value = task_data.title; //insert old task name and content into modal fields
         content.value = task_data.content;
-        console.log(boardID);
-        document.querySelector('#close-task-modal').addEventListener('click', function(){
-            task_data.title = title.value; //catch new/changed data form texareas
+
+        //to gówno nie pasuje w tym miejscu
+        document.querySelector('#close-task-modal').addEventListener('click', function() {
+
+            task_data.title = title.value; //override/catch new/changed data form texareas
             task_data.content = content.value;
-            dataHandler.saveNewTaskData(task_data);
-            // dom.loadCards(boardID);
+
+            dom.saveTaskDataButton(task_data);
         });
+    },
+    saveTaskDataButton: function(task_data) {
+        dataHandler.saveNewTaskData(task_data);
+        dom.refreshTasks(task_data);
+    },
+    refreshTasks: function(task_data){
+
+        let child = document.querySelector(`#task${task_data.taskID}`).children;
+        child.item(0).innerText = task_data.title;
+        child.item(1).innerText = task_data.content;
     }
-    // here comes more features
 };

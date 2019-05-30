@@ -51,6 +51,7 @@ def get_task_by_task_id(task_id):
 
 
 def save_new_task_data(task_data):
+    print(task_data)
     return data_manager.execute_dml_statement("UPDATE tasks "
                                                 " SET title = %(new_title)s, content=%(new_content)s "
                                                 " WHERE taskid=%(task_id)s;",
