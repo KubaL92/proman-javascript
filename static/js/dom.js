@@ -69,9 +69,10 @@ export let dom = {
                     See details
                 </button>
             </div>`);
+            //adding event listener to task btns
             document.querySelector(`#task-details-btn${tasks[taskID].taskid}`).addEventListener('click', dataHandler.getDataTaskModal);
         }
-            //adding event listener to task btn
+
 
 
     },
@@ -132,4 +133,5 @@ export let dom = {
         child.item(0).innerText = task_data.title;
         child.item(1).innerText = task_data.content;
     }
+    // here comes more features
 };
