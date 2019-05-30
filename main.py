@@ -74,6 +74,13 @@ def new_board():
     logic.add_fixed_columns(latest_board['boardid'])
     return latest_board
 
+@app.route("/new-task/<int:board_id>", methods=['GET'])
+@json_response
+def new_task(board_id: int):
+    task_data = logic.add_new_task(board_id)
+    task_data['boardid']=board_id
+    return task_data
+
 
 @app.route("/get-cards/<int:board_id>")
 @json_response

@@ -18,6 +18,10 @@ def get_columns_with_tasks_by_board_id(board_id):
     # }
     return columns, tasks
 
+def get_tasks_list(board_id):
+    tasks = queries.get_tasks_to_board_and_column(board_id)
+    return tasks
+
 
 def test_db_conn():
     print(db_connection.test_connection_db())
@@ -49,9 +53,16 @@ def add_fixed_columns(board_id):
     for column in columns:
         queries.add_column(column)
 
+def add_new_task(board_id):
+    task_data = {'column_id': 1, 'board_id': board_id, 'title':'new task', 'content':'tekst'}
+    queries.add_task(task_data)
+    last_task = queries.get_tasks_to_board_and_column(board_id)[-1]
+    return last_task
+
 
 def change_task_col(task_id, new_col):
     queries.change_task_column(task_id, new_col)
+
 
 
 if __name__ == '__main__':

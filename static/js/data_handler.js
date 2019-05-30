@@ -68,7 +68,13 @@ export let dataHandler = {
         this._api_get('/new-board', function(response) {
             dom.newBoard(response);
         });
+    },
 
+    createNewTask: function (boardId) {
+        this._api_get(`/new-task/${boardId}`, function(response) {
+            console.log("task data", response);
+            dom.newTask(response);
+        });
 
     },
     createNewCard: function (cardTitle, boardId, statusId, callback) {

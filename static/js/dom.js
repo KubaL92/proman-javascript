@@ -23,13 +23,20 @@ export let dom = {
                     </button>
                 </div>
                 <div class="collapse" id="board${board.boardid}">
-                        <div class="card-group" id="board${board.boardid}-content">//</div>
+                <div>
+                    <button type="button" class="btn btn-warning btn-sm btn-block rounded-0" id="new-task${board.boardid}">Add New Task</button>
+                    </div>
+                       <div class="card-group" id="board${board.boardid}-content"></div>
                 </div>
                 <br>
                 <br>`);
             document.querySelector(`#board-wrap${board.boardid}`).addEventListener('click', function(){
                 dom.loadCards(board.boardid);
             });
+            document.querySelector(`#new-task${board.boardid}`).addEventListener("click", function () {
+                dataHandler.createNewTask(board.boardid);
+            });
+
         }
     },
     loadCards: function (boardId) {
@@ -93,13 +100,25 @@ export let dom = {
                     </button>
                 </div>
                 <div class="collapse" id="board${board.boardid}">
-                        <div class="card-group" id="board${board.boardid}-content">//</div>
+                 <div>
+                    <button type="button" class="btn btn-warning btn-sm btn-block rounded-0" id="new-task">Add New Task</button>
+                    </div>               
+                        <div class="card-group" id="board${board.boardid}-content">//</div>                      
                 </div>
                 <br>
                 <br>`);
         document.querySelector(`#board-wrap${board.boardid}`).addEventListener('click', function(){
             dom.loadCards(board.boardid);
         });
-    }
+    },
     // here comes more features
+    newTask: function (taskData) {
+        document.querySelector(`#column${taskData.columnid}-board${taskData.boardid}`).insertAdjacentHTML('afterbegin',`
+         <div class="card border-info text-center p-3 mt-2" data-task-id="${taskData.taskid}">
+                <div class="card-header text-white bg-secondary">${taskData.title}</div>
+                <p class="card-text">${taskData.content}</p>
+                <button class="btn btn-sm btn-info">See details</button>
+            </div>
+        `);
+    }
 };

@@ -12,7 +12,7 @@ def get_columns_to_board(board_id):
 
 
 def get_tasks_to_board_and_column(board_id):
-    return data_manager.execute_select("SELECT taskID, columnID, title, content FROM tasks "
+    return data_manager.execute_select("SELECT taskID, columnID, boardID, title, content FROM tasks "
                                        "WHERE boardID=%(relatedBoard)s ",
                                        {'relatedBoard': board_id})
 
@@ -41,6 +41,9 @@ def add_user(user_data):
             return False
         return True
 
+def add_task(task_data):
+    return data_manager.execute_dml_statement("INSERT INTO tasks (columnID, boardID, title, content)"
+                                              "VALUES (%(column_id)s, %(board_id)s, %(title)s, %(content)s);", task_data)
 
 def change_task_column(task_id, new_col):
     return data_manager.execute_dml_statement("UPDATE tasks "

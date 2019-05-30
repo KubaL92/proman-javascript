@@ -126,18 +126,3 @@ VALUES('DONE', 3);
 
 INSERT INTO tasks (columnID, boardID, title, content)
 VALUES(4, 3, 'NAVBAR', 'Lorem Ipsum');
-
-INSERT INTO tasks (columnID, boardID, title, content)
-VALUES(4, 3, 'FOOTER', 'Lorem Ipsum');
-
-INSERT INTO tasks (columnID, boardID, title, content)
-VALUES(2, 3, 'SITE CONTENT', 'Lorem Ipsum');
-
-INSERT INTO tasks (columnID, boardID, title, content)
-VALUES(2, 3, 'MENU', 'Lorem Ipsum');
-
-INSERT INTO tasks (columnID, boardID, title, content)
-VALUES(1, 3, 'LOGIN', 'Lorem Ipsum');
-
-INSERT INTO tasks (columnID, boardID, title, content)
-VALUES(1, 3, 'REGISTER', 'Lorem Ipsum');
