@@ -15,14 +15,14 @@ export let dom = {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
 
-        for(let board of boards){
+        for(let board of boards) {
             document.querySelector('#boards').insertAdjacentHTML('afterbegin',  `
                 <div class="card" id="board-wrap${board.boardid}" data-id="${board.boardid}">
                     <button class="btn btn-primary btn-dark" type="button" data-toggle="collapse" data-target="#board${board.boardid}" aria-expanded="false" aria-controls="collapseExample">
-                        <div id="board-title">${board.title}<i class="fas fa-pen ml-1" id="edit-button"></i></div>
+                        <div id="board-title${board.boardid}">${board.title}<i class="fas fa-pen ml-1" id="edit-button"></i></div>
                     </button>
                 </div>
-                <div class="collapse" id="board${board.boardid}">
+                <div class="collapse" id="board${board.boardid}">  
                         <div class="card-group" id="board${board.boardid}-content">//</div>
                 </div>
                 <br>
@@ -30,9 +30,9 @@ export let dom = {
             document.querySelector(`#board-wrap${board.boardid}`).addEventListener('click', function(){
                 dom.loadCards(board.boardid);
                 });
-            document.querySelector("#edit-button").addEventListener('click', function(event) {
+            document.querySelector(".fas").addEventListener('click', function(event) {
                 event.stopPropagation();
-                dataHandler.editBoardName(event);
+                dataHandler.editBoardName(board.boardid);
                 });
 
         }
@@ -93,7 +93,7 @@ export let dom = {
         
                 <div class="card" id="board-wrap${board.boardid}" data-id="${board.boardid}">
                     <button class="btn btn-primary btn-dark" type="button" data-toggle="collapse" data-target="#board${board.boardid}" aria-expanded="false" aria-controls="collapseExample">
-                        <div id="board-title">${board.title}<i class="fas fa-pen ml-1" id="edit-button"></i></div>
+                        <div id="board-title${board.boardid}">${board.title}<i class="fas fa-pen ml-1" id="edit-button"></i></div>
                     </button>
                 </div>
                 <div class="collapse" id="board${board.boardid}">
@@ -104,9 +104,9 @@ export let dom = {
         document.querySelector(`#board-wrap${board.boardid}`).addEventListener('click', function(){
             dom.loadCards(board.boardid);
         });
-        document.querySelector("#edit-button").addEventListener('click', function(button) {
+        document.querySelector(".fas").addEventListener('click', function(button) {
                 button.stopPropagation();
-                dataHandler.editBoardName();
+                dataHandler.editBoardName(board.boardid);
           });
     }
     // here comes more features

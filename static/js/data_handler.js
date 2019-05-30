@@ -1,4 +1,4 @@
-import { dom } from "./dom.js";
+import {dom} from "./dom.js";
 // this object contains the functions which handle the data and its reading/writing
 // feel free to extend and change to fit your needs
 
@@ -14,8 +14,8 @@ export let dataHandler = {
             method: 'GET',
             credentials: 'same-origin'
         })
-        .then(response => response.json())  // parse the response as JSON
-        .then(json_response => callback(json_response));  // Call the `callback` with the returned object
+            .then(response => response.json())  // parse the response as JSON
+            .then(json_response => callback(json_response));  // Call the `callback` with the returned object
     },
     _api_post: function (url, data, callback) {
         // it is not called from outside
@@ -29,9 +29,9 @@ export let dataHandler = {
             },
             body: data
         })
-            .then(response=>response.json())
-            .then(json_response=>callback(json_response))
-            .catch(error=>console.log('Error:', error))
+            .then(response => response.json())
+            .then(json_response => callback(json_response))
+            .catch(error => console.log('Error:', error))
     },
     init: function () {
     },
@@ -65,7 +65,7 @@ export let dataHandler = {
     },
     createNewBoard: function () {
         // creates new board, saves it and calls the callback function with its data
-        this._api_get('/new-board', function(response) {
+        this._api_get('/new-board', function (response) {
             dom.newBoard(response);
         });
 
@@ -74,23 +74,30 @@ export let dataHandler = {
     createNewCard: function (cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
     },
-    changeTaskColumn: function(el) {
+    changeTaskColumn: function (el) {
         let taskID = el.dataset.taskId;
         let newColumn = el.parentNode.dataset.colId;
-        this._api_get(`/change-task-column/${taskID}/${newColumn}`, function(res){
+        this._api_get(`/change-task-column/${taskID}/${newColumn}`, function (res) {
             console.log(res);
         })
     },
 
-    editBoardName: function (event) {
-        let boardTitle = document.querySelector('#board-title');
-        boardTitle.innerHTML = "<input type=\"text\" size='10' maxlength='40'> " +
-            "<i class=\"far fa-save text-warning\"></i>";
-        event.stopPropagation();
-        },
-    // here comes more features
+    editBoardName: function (boardId) {
+        let boardTitle = document.getElementById(`board-title${boardId}`);
+        boardTitle.innerHTML = "<input id='name-area' type=\"text\" size='10' maxlength='40'> " +
+            "<i class='far fa-save text-warning'></i>";
+        document.querySelector('#name-area').addEventListener('click', function (event) {
+            event.stopPropagation();
+        document.querySelector('.fa-save').addEventListener('click', function(event) {
+            event.stopPropagation()
+            console.log('poszlo')
+        })
+        });
+
+        // here comes more features
 
 
-};
+    },
+}
 
 
