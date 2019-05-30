@@ -1,7 +1,6 @@
 from data import queries
 from pprint import pprint
 from data import db_connection
-import login
 
 
 def get_board_list():
