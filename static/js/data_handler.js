@@ -80,8 +80,17 @@ export let dataHandler = {
         this._api_get(`/change-task-column/${taskID}/${newColumn}`, function(res){
             console.log(res);
         })
-    }
+    },
+
+    editBoardName: function (event) {
+        let boardTitle = document.querySelector('#board-title');
+        boardTitle.innerHTML = "<input type=\"text\" size='10' maxlength='40'> " +
+            "<i class=\"far fa-save text-warning\"></i>";
+        event.stopPropagation();
+        },
     // here comes more features
 
 
 };
+
+

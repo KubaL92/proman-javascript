@@ -19,7 +19,7 @@ export let dom = {
             document.querySelector('#boards').insertAdjacentHTML('afterbegin',  `
                 <div class="card" id="board-wrap${board.boardid}" data-id="${board.boardid}">
                     <button class="btn btn-primary btn-dark" type="button" data-toggle="collapse" data-target="#board${board.boardid}" aria-expanded="false" aria-controls="collapseExample">
-                        <div id="board-title">${board.title}<i class="fas fa-pen ml-1"></i></div>
+                        <div id="board-title">${board.title}<i class="fas fa-pen ml-1" id="edit-button"></i></div>
                     </button>
                 </div>
                 <div class="collapse" id="board${board.boardid}">
@@ -29,7 +29,12 @@ export let dom = {
                 <br>`);
             document.querySelector(`#board-wrap${board.boardid}`).addEventListener('click', function(){
                 dom.loadCards(board.boardid);
-            });
+                });
+            document.querySelector("#edit-button").addEventListener('click', function(event) {
+                event.stopPropagation();
+                dataHandler.editBoardName(event);
+                });
+
         }
     },
     loadCards: function (boardId) {
@@ -88,7 +93,7 @@ export let dom = {
         
                 <div class="card" id="board-wrap${board.boardid}" data-id="${board.boardid}">
                     <button class="btn btn-primary btn-dark" type="button" data-toggle="collapse" data-target="#board${board.boardid}" aria-expanded="false" aria-controls="collapseExample">
-                        <div id="board-title">${board.title}<i class="fas fa-pen ml-1"></i></div>
+                        <div id="board-title">${board.title}<i class="fas fa-pen ml-1" id="edit-button"></i></div>
                     </button>
                 </div>
                 <div class="collapse" id="board${board.boardid}">
@@ -99,6 +104,10 @@ export let dom = {
         document.querySelector(`#board-wrap${board.boardid}`).addEventListener('click', function(){
             dom.loadCards(board.boardid);
         });
+        document.querySelector("#edit-button").addEventListener('click', function(button) {
+                button.stopPropagation();
+                dataHandler.editBoardName();
+          });
     }
     // here comes more features
 };
