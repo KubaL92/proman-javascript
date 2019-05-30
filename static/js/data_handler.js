@@ -85,12 +85,13 @@ export let dataHandler = {
     editBoardName: function (boardId) {
         let boardTitle = document.getElementById(`board-title${boardId}`);
         boardTitle.innerHTML = "<input id='name-area' type=\"text\" size='10' maxlength='40'> " +
-            "<i class='far fa-save text-warning'></i>";
+            "<i class='far fa-save text-warning' id='name-saver'></i>";
         document.querySelector('#name-area').addEventListener('click', function (event) {
             event.stopPropagation();
         document.querySelector('.fa-save').addEventListener('click', function(event) {
-            event.stopPropagation()
-            console.log('poszlo')
+            event.stopPropagation();
+            let newTableName = document.getElementById('name-saver').target(value);
+           console.log(newTableName)
         })
         });
 
