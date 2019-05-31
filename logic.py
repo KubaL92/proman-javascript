@@ -18,26 +18,6 @@ def test_db_conn():
     print(db_connection.test_connection_db())
 
 
-def save_new_user_data(user_data):
-    hashed_pass = login.hash_password(user_data['password'])
-    user_data['password'] = hashed_pass
-    added = login.save_new_user_data(user_data)
-    return added
-
-# what is this?
-# def save_new_user_data(user_data):
-#     hashed_pass = login.hash_password(user_data['password'])
-#     user_data['password'] = hashed_pass
-#     added = queries.add_user(user_data)
-#     return added
-#
-# def user_login(user_data):
-#     hashed_pass = data_manager.get_pass_by_email(user_data['email'])[0]['password']
-#     authenticate = verify_password(user_data['password'], hashed_pass)
-#
-#     return authenticate  # True/False
-
-
 def add_new_board():
     board_data = {
         'title': 'new board',
