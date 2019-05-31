@@ -110,25 +110,27 @@ export let dom = {
     fillTaskModal: function (task_data) {
         let title = document.querySelector('#task-title');
         let content = document.querySelector('#task-content');
+        let modalFooter = document.querySelector('.modal-footer');
 
-        title.value = task_data.title; //insert old task name and content into modal fields
+        //insert old task name and content into modal fields
+        title.value = task_data.title;
         content.value = task_data.content;
 
-        //to gówno nie pasuje w tym miejscu
-        document.querySelector('#close-task-modal').addEventListener('click', function() {
+        //inserts new button into modal footer
+        modalFooter.innerHTML = `
+            <button type="button" class="btn btn-outline-warning" data-dismiss="modal" id="close-task-modal${task_data.taskID}" >
+                Save & Close
+            </button>`;
 
+        document.querySelector(`#close-task-modal${task_data.taskID}`).addEventListener('click', function() {
             task_data.title = title.value; //override/catch new/changed data form texareas
             task_data.content = content.value;
 
-            dom.saveTaskDataButton(task_data);
+            dataHandler.saveNewTaskData(task_data);
+            dom.refreshTasks(task_data);
         });
     },
-    saveTaskDataButton: function(task_data) {
-        dataHandler.saveNewTaskData(task_data);
-        dom.refreshTasks(task_data);
-    },
     refreshTasks: function(task_data){
-
         let child = document.querySelector(`#task${task_data.taskID}`).children;
         child.item(0).innerText = task_data.title;
         child.item(1).innerText = task_data.content;
