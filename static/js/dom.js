@@ -23,12 +23,18 @@ export let dom = {
                     </button>
                 </div>
                 <div class="collapse" id="board${board.boardid}">
-                        <div class="card-group" id="board${board.boardid}-content">//</div>
+                    <button type="button" id="new-task-btn" class="btn btn-warning btn-sm btn-block rounded-0" >Add New Task</button>
+                    <div class="card-group" id="board${board.boardid}-content">
+                    <!--Here goes board content - cards with tasks -->
+                    </div>
                 </div>
                 <br>
                 <br>`);
             document.querySelector(`#board-wrap${board.boardid}`).addEventListener('click', function(){
                 dom.loadCards(board.boardid);
+            });
+            document.querySelector(`#new-task-btn`).addEventListener('click', function(){
+                dataHandler.createNewTask(board.boardid);
             });
         }
     },

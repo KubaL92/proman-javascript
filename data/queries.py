@@ -34,12 +34,12 @@ def add_column(column):
 
 
 def add_user(user_data):
-        try:
-         data_manager.execute_dml_statement("INSERT INTO users (email, username, password) "
-                                            "VALUES (%(email)s, %(username)s, %(password)s);", user_data)
-        except psycopg2.IntegrityError:
-            return False
-        return True
+    try:
+        data_manager.execute_dml_statement("INSERT INTO users (email, username, password) "
+                                        "VALUES (%(email)s, %(username)s, %(password)s);", user_data)
+    except psycopg2.IntegrityError:
+        return False
+    return True
 
 
 def change_task_column(task_id, new_col):
@@ -68,3 +68,11 @@ def check_user_info_by_email(email):
     return data_manager.execute_select("SELECT userID, email, username, password FROM users WHERE"
                                        " email=%(email)s",
                                        {'email': email})
+
+
+def save_new_task(board_id):
+    return data_manager.execute_dml_statement("INSERT INTO tasks (columnid, boardid, title, content)"
+                                            "VALUES (%(column_id)s, %(board_id)s, %(title)s, %(content)s);",
+                                                {"column_id": 1, "board_id": board_id,
+                                                "title": "NEW TASK", "content": "Lorem Ipsum"})
+

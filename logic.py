@@ -47,6 +47,10 @@ def save_new_task_data(task_data):
     queries.save_new_task_data(task_data)
 
 
+def create_new_task(board_id):
+    queries.save_new_task(board_id)
+
+
 if __name__ == '__main__':
     pprint(get_columns_with_tasks_by_board_id(1))
 

@@ -72,6 +72,11 @@ export let dataHandler = {
     createNewCard: function (cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
     },
+    createNewTask: function(boardId) {
+        this._api_get(`/create-new-task/${boardId}`, function(res){
+            dom.loadCards(boardId);
+        })
+    },
     changeTaskColumn: function(el) {
         let taskID = el.dataset.taskId;
         let newColumn = el.parentNode.dataset.colId;
@@ -89,7 +94,6 @@ export let dataHandler = {
         });
     },
     saveNewTaskData: function(taskData){
-        console.log(taskData);
         this._api_post('/save-new-task-data', taskData, function(res){
             console.log(res);
         })

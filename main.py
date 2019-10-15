@@ -108,6 +108,13 @@ def save_new_task_data():
     return "{'message': 'new task data saved'}"
 
 
+@app.route("/create-new-task/<int:board_id>", methods=['GET'])
+@json_response
+def create_new_task(board_id):
+    logic.create_new_task(board_id)
+    return "{'message': 'new task created/ added to db'}"
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
